@@ -1,0 +1,36 @@
+package main
+
+import (
+	"context"
+	"log"
+	"net"
+
+	pb "github.com/Andylixunan/mini-instagram/global/proto/account"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/reflection"
+	"google.golang.org/grpc/status"
+)
+
+type server struct {
+	pb.UnimplementedAccountServer
+}
+
+func (*server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+
+func (*server) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+
+func main() {
+	svr := grpc.NewServer()
+	pb.RegisterAccountServer(svr, &server{})
+	reflection.Register(svr)
+	lis, err := net.Listen("tcp", ":8081")
+	if err != nil {
+		log.Fatal(err)
+	}
+	svr.Serve(lis)
+}
