@@ -21,7 +21,7 @@ func (*server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.Regis
 }
 
 func (*server) Login(ctx context.Context, req *pb.LoginRequest) (*pb.LoginResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
 }
 
 func main() {
