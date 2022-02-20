@@ -9,6 +9,7 @@ require (
 )
 
 require (
+	github.com/gin-contrib/zap v0.0.2
 	github.com/spf13/viper v1.10.1
 	go.uber.org/zap v1.21.0
 	gorm.io/driver/mysql v1.3.2
