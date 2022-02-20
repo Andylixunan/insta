@@ -2,20 +2,21 @@ syntax = "proto3";
 
 package account;
 
-option go_package="github.com/Andylixunan/mini-instagram/account";
+option go_package="github.com/Andylixunan/mini-instagram/global/proto/account";
 
 service Account {
     rpc Register (RegisterRequest) returns (RegisterResponse);
     rpc Login (LoginRequest) returns (LoginResponse);
+    rpc Auth (AuthRequest) returns (AuthResponse);
 }
 
-message UserAuthInfo {
+message User {
     string username = 1;
     string password = 2;
 }
 
 message RegisterRequest {
-    UserAuthInfo userAuthInfo = 1;
+    User user = 1;
 }
 
 message RegisterResponse {
@@ -24,9 +25,18 @@ message RegisterResponse {
 }
 
 message LoginRequest {
-    UserAuthInfo userAuthInfo = 1;
+    User user = 1;
 }
 
 message LoginResponse {
     string token = 1;
+}
+
+message AuthRequest {
+    string token = 1;
+}
+
+message AuthResponse {
+    bool valid = 1;
+    uint32 userID = 2;
 }

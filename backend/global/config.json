@@ -1,20 +1,20 @@
 {
-    "account-service": {
-        "grpc-port": ":8081",
-        "jwt-token": {
-            "signing-secret": "InstagramProjectbyLXNandLYT",
-            "issuer": "instagram-manager",
-            "expire-minutes": 15
-        },
-        "database":{
-            "user": "root",
-            "passwd": "Andy990515!",
-            "dsn": "127.0.0.1:3306",
-            "dbname": "instagram",
-            "options": "charset=utf8mb4&parseTime=True&loc=Local"
+    "JWT": {
+        "Secret": "InstagramProjectbyLXNandLYT",
+        "Issuer": "instagram-manager",
+        "Expire": 15
+    },
+    "Account": {
+        "Port": ":8081",
+        "DB":{
+            "User": "root",
+            "Passwd": "Andy990515!",
+            "DSN": "127.0.0.1:3306",
+            "Name": "instagram",
+            "Options": "charset=utf8mb4&parseTime=True&loc=Local"
         }
     },
-    "api-gateway":{
-        "http-port": ":8080"
+    "Gateway":{
+        "Port": ":8080"
     }
 }

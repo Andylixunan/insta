@@ -3,24 +3,26 @@ package main
 import (
 	"log"
 
+	"github.com/Andylixunan/mini-instagram/global/config"
 	"github.com/gin-gonic/gin"
-	"github.com/spf13/viper"
 )
 
+var configs *config.Config
+
 func main() {
-	viper.SetConfigFile("../global/config.json")
-	err := viper.ReadInConfig()
+	var err error
+	configs, err = config.Load("../global/config.json")
 	if err != nil {
 		log.Fatal(err)
 	}
 	router := gin.Default()
-	router.POST("/register", register)
-	err = router.Run(viper.GetString("api-gateway.http-port"))
+	accountGroup := router.Group("/account")
+	{
+		accountGroup.POST("/register", register)
+	}
+	log.Println(configs)
+	err = router.Run(configs.Gateway.Port)
 	if err != nil {
 		log.Fatal(err)
 	}
-}
-
-func register(c *gin.Context) {
-
 }
