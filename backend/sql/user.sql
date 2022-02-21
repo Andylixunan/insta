@@ -6,4 +6,4 @@ CREATE TABLE users
     created_at DATETIME(3),
     updated_at DATETIME(3),
     deleted_at DATETIME(3) NULL
-);
+) CHARACTER SET utf8mb4;
