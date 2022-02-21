@@ -6,6 +6,7 @@ import (
 	"github.com/Andylixunan/mini-instagram/global/client"
 	"github.com/Andylixunan/mini-instagram/global/proto/account"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/grpc/status"
 )
 
 type Register struct {
@@ -16,7 +17,7 @@ type Register struct {
 func register(c *gin.Context) {
 	var registerInfo Register
 	if err := c.ShouldBindJSON(&registerInfo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "missing JSON body"})
 		return
 	}
 	grpcClient, err := client.NewAccountClient(configs.Account.Port)
@@ -31,10 +32,11 @@ func register(c *gin.Context) {
 		},
 	})
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		errStatus, _ := status.FromError(err)
+		c.JSON(http.StatusBadRequest, gin.H{"error": errStatus.Message()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"userID": resp.GetUserID()})
+	c.JSON(http.StatusOK, gin.H{"error": nil, "userID": resp.GetUserID()})
 }
 
 func login(c *gin.Context) {

@@ -29,14 +29,14 @@ type server struct {
 func (*server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.RegisterResponse, error) {
 	username := req.GetUser().GetUsername()
 	user := &model.User{}
-	err := db.Where("username = ?", username).First(user).Error
-	if err == nil && user.ID != 0 {
-		logger.Infof("username already exists: %v", user.Username)
+	db.Where("username = ?", username).Find(user)
+	if user.ID != 0 {
+		logger.Infof("username already exists: %v, id: %v", user.Username, user.ID)
 		return nil, status.Errorf(codes.AlreadyExists, "username already exists")
 	}
 	password, err := generateFromPassword(req.GetUser().GetPassword())
 	if err != nil {
-		logger.Warn(err)
+		logger.Warnf("failed to generate password hash, error: %v", err)
 		return nil, status.Errorf(codes.Internal, "failed to generate password hash")
 	}
 	insertedUser := &model.User{
@@ -44,6 +44,7 @@ func (*server) Register(ctx context.Context, req *pb.RegisterRequest) (*pb.Regis
 		Password: password,
 	}
 	db.Create(insertedUser)
+	logger.Infof("user created: %v, ID: %v", insertedUser.Username, insertedUser.ID)
 	return &pb.RegisterResponse{
 		UserID: insertedUser.ID,
 	}, nil
