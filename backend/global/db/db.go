@@ -9,8 +9,7 @@ import (
 
 func NewDBConnection(dsn string) (*gorm.DB, error) {
 	db, err := gorm.Open(mysql.New(mysql.Config{
-		DSN:               dsn,
-		DefaultStringSize: 255,
+		DSN: dsn,
 	}), &gorm.Config{})
 	if err != nil {
 		return nil, err

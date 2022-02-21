@@ -20,8 +20,7 @@ message RegisterRequest {
 }
 
 message RegisterResponse {
-    bool success = 1;
-    uint32 userID = 2;
+    uint32 userID = 1;
 }
 
 message LoginRequest {
