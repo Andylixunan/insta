@@ -9,13 +9,14 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-type Register struct {
+// TODO: input validation such as length
+type User struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
 func register(c *gin.Context) {
-	var registerInfo Register
+	var registerInfo User
 	if err := c.ShouldBindJSON(&registerInfo); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "missing JSON body"})
 		return
