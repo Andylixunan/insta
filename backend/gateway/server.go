@@ -1,10 +1,9 @@
-package main
+package gateway
 
 import (
 	"time"
 
 	"github.com/Andylixunan/mini-instagram/global/config"
-	"github.com/Andylixunan/mini-instagram/global/log"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
@@ -13,17 +12,8 @@ import (
 var configs *config.Config
 var logger *zap.SugaredLogger
 
-func main() {
-	var err error
-	logger, err = log.New()
-	defer logger.Sync()
-	if err != nil {
-		logger.Fatal(err)
-	}
-	configs, err = config.Load("../global/config.json")
-	if err != nil {
-		logger.Fatal(err)
-	}
+func NewServer(c *config.Config, l *zap.SugaredLogger) *gin.Engine {
+	configs, logger = c, l
 	router := gin.New()
 	router.Use(ginzap.Ginzap(logger.Desugar(), time.RFC3339, true))
 	router.Use(ginzap.RecoveryWithZap(logger.Desugar(), true))
@@ -32,8 +22,5 @@ func main() {
 		accountAPIGroup.POST("/register", register)
 		accountAPIGroup.POST("/login", login)
 	}
-	err = router.Run(configs.Gateway.Port)
-	if err != nil {
-		logger.Fatal(err)
-	}
+	return router
 }
