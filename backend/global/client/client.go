@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	accountpb "github.com/Andylixunan/mini-instagram/global/proto/account"
+	accountpb "github.com/Andylixunan/insta/global/proto/account"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 )

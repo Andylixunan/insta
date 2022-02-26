@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/Andylixunan/mini-instagram/gateway"
-	"github.com/Andylixunan/mini-instagram/global/config"
-	"github.com/Andylixunan/mini-instagram/global/log"
+	"github.com/Andylixunan/insta/gateway"
+	"github.com/Andylixunan/insta/global/config"
+	"github.com/Andylixunan/insta/global/log"
 )
 
 func main() {

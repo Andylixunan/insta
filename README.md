@@ -1,4 +1,4 @@
-# mini-instagram
+# insta - an implementation of basic functions of instagram
 
 ## Backend Microservice Structure
 

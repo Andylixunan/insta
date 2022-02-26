@@ -3,8 +3,8 @@ package gateway
 import (
 	"net/http"
 
-	"github.com/Andylixunan/mini-instagram/global/client"
-	"github.com/Andylixunan/mini-instagram/global/proto/account"
+	"github.com/Andylixunan/insta/global/client"
+	"github.com/Andylixunan/insta/global/proto/account"
 	"github.com/gin-gonic/gin"
 	"google.golang.org/grpc/status"
 )

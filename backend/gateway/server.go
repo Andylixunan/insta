@@ -3,7 +3,7 @@ package gateway
 import (
 	"time"
 
-	"github.com/Andylixunan/mini-instagram/global/config"
+	"github.com/Andylixunan/insta/global/config"
 	ginzap "github.com/gin-contrib/zap"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"

@@ -1,4 +1,4 @@
-module github.com/Andylixunan/mini-instagram
+module github.com/Andylixunan/insta
 
 go 1.17
 
