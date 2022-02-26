@@ -2,8 +2,8 @@ package main
 
 import (
 	"github.com/Andylixunan/insta/gateway"
-	"github.com/Andylixunan/insta/global/config"
-	"github.com/Andylixunan/insta/global/log"
+	"github.com/Andylixunan/insta/pkg/config"
+	"github.com/Andylixunan/insta/pkg/log"
 )
 
 func main() {

@@ -14,7 +14,8 @@ type DB struct {
 	Options string
 }
 
-type Account struct {
+type User struct {
+	Host string
 	Port string
 	DB   DB
 }
@@ -25,7 +26,7 @@ type Gateway struct {
 
 type Config struct {
 	JWT     JWT
-	Account Account
+	User    User
 	Gateway Gateway
 }
 

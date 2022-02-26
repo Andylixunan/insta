@@ -1,4 +1,4 @@
-package db
+package dbcontext
 
 import (
 	"fmt"
@@ -7,14 +7,18 @@ import (
 	"gorm.io/gorm"
 )
 
-func NewDBConnection(dsn string) (*gorm.DB, error) {
+type DB struct {
+	*gorm.DB
+}
+
+func NewDBConnection(dsn string) (*DB, error) {
 	db, err := gorm.Open(mysql.New(mysql.Config{
 		DSN: dsn,
 	}), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
-	return db, nil
+	return &DB{db}, nil
 }
 
 func GetDBConnectionStr(user, passwd, dsn, dbname, option string) string {

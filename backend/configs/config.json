@@ -4,13 +4,14 @@
         "Issuer": "instagram-manager",
         "Expire": 15
     },
-    "Account": {
+    "User": {
+        "Host": "localhost",
         "Port": ":8081",
         "DB":{
             "User": "root",
             "Passwd": "Andy990515!",
             "DSN": "127.0.0.1:3306",
-            "Name": "instagram",
+            "Name": "instagram_users",
             "Options": "charset=utf8mb4&parseTime=True&loc=Local"
         }
     },

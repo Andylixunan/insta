@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package user;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package="github.com/Andylixunan/insta/api/proto/user";
+
+service UserService {
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
+    rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserResponse) {}
+}
+
+message User {
+    uint32 id = 1;
+    string username = 2;
+    string password = 3;
+    string nickname = 4;
+    string self_description = 5;
+    string avatar = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+message CreateUserRequest {
+    User user = 1;
+}
+  
+message CreateUserResponse {
+    User user = 1;
+}
+
+message GetUserRequest {
+    uint64 id = 1;
+}
+  
+message GetUserResponse {
+    User user = 1;
+}
+
+message GetUserByUsernameRequest {
+    string username = 1;
+}
