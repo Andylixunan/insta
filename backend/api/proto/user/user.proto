@@ -7,9 +7,9 @@ import "google/protobuf/timestamp.proto";
 option go_package="github.com/Andylixunan/insta/api/proto/user";
 
 service UserService {
-    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
-    rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
-    rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserResponse) {}
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {};
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {};
+    rpc GetUserByUsername(GetUserByUsernameRequest) returns (GetUserResponse) {};
 }
 
 message User {

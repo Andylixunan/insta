@@ -40,8 +40,8 @@ func main() {
 	repository := user.NewRepository(logger, db)
 	// start the grpc server
 	svr := grpc.NewServer()
-	userServer := user.NewServer(logger, repository)
-	pb.RegisterUserServiceServer(svr, userServer)
+	userServiceServer := user.NewServer(logger, repository)
+	pb.RegisterUserServiceServer(svr, userServiceServer)
 	reflection.Register(svr)
 	lis, err := net.Listen("tcp", configs.User.Port)
 	if err != nil {
