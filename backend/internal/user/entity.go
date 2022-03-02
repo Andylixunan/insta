@@ -7,10 +7,13 @@ import (
 )
 
 type User struct {
-	ID        uint32 `gorm:"primaryKey"`
-	Username  string
-	Password  string
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeletedAt gorm.DeletedAt
+	ID              uint32 `gorm:"primaryKey"`
+	Username        string
+	Password        string
+	Nickname        string
+	SelfDescription string
+	Avatar          string
+	CreatedAt       time.Time
+	UpdatedAt       time.Time
+	DeletedAt       gorm.DeletedAt
 }
