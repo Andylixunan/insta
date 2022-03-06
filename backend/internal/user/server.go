@@ -32,7 +32,7 @@ func (s *server) CreateUser(ctx context.Context, req *pb.CreateUserRequest) (*pb
 	user := &User{
 		Username:        req.GetUser().GetUsername(),
 		Password:        password,
-		Nickname:        req.GetUser().Nickname,
+		Nickname:        req.GetUser().GetNickname(),
 		SelfDescription: req.GetUser().GetSelfDescription(),
 		Avatar:          req.GetUser().GetAvatar(),
 	}
