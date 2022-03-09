@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package user;
 
-import "google/protobuf/timestamp.proto";
-
 option go_package="github.com/Andylixunan/insta/api/proto/user";
 
 service UserService {
@@ -22,8 +20,6 @@ message User {
     string nickname = 4;
     string self_description = 5;
     string avatar = 6;
-    google.protobuf.Timestamp created_at = 7;
-    google.protobuf.Timestamp updated_at = 8;
 }
 
 message CreateUserRequest {

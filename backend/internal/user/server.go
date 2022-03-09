@@ -8,7 +8,6 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
 type server struct {
@@ -107,7 +106,5 @@ func entityToProtobuf(user *User) *pb.User {
 		Nickname:        user.Nickname,
 		SelfDescription: user.SelfDescription,
 		Avatar:          user.Avatar,
-		CreatedAt:       timestamppb.New(user.CreatedAt),
-		UpdatedAt:       timestamppb.New(user.UpdatedAt),
 	}
 }
