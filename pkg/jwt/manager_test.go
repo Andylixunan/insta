@@ -27,7 +27,7 @@ func TestManager_Validate(t *testing.T) {
 	conf := &config.Config{
 		JWT: config.JWT{
 			Secret: "secret",
-			Expire: 5 * time.Second,
+			Expire: 1 * time.Second,
 		},
 	}
 	jwtManager := NewManager(conf)
@@ -40,4 +40,7 @@ func TestManager_Validate(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, id, claims.ID)
 	t.Logf("decoded: %+v", claims)
+	time.Sleep(2 * time.Second)
+	_, err = jwtManager.Validate(tokenStr)
+	require.Error(t, err)
 }
