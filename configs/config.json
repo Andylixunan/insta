@@ -1,7 +1,6 @@
 {
     "JWT": {
         "Secret": "InstagramProjectbyLXNandLYT",
-        "Issuer": "instagram-manager",
         "Expire": 15
     },
     "User": {
@@ -14,6 +13,10 @@
             "Name": "instagram_users",
             "Options": "charset=utf8mb4&parseTime=True&loc=Local"
         }
+    },
+    "Auth": {
+        "Host": "localhost",
+        "Port": ":8082"
     },
     "Gateway":{
         "Port": ":8080"

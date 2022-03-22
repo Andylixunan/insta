@@ -20,6 +20,11 @@ type User struct {
 	DB   DB
 }
 
+type Auth struct {
+	Host string
+	Port string
+}
+
 type Gateway struct {
 	Port string
 }
@@ -32,7 +37,6 @@ type Config struct {
 
 type JWT struct {
 	Secret string
-	Issuer string
 	Expire time.Duration
 }
 
