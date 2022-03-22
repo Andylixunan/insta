@@ -43,7 +43,8 @@ func main() {
 	userServiceServer := user.NewServer(logger, repository)
 	pb.RegisterUserServiceServer(svr, userServiceServer)
 	reflection.Register(svr)
-	lis, err := net.Listen("tcp", configs.User.Port)
+	logger.Infof("user server starts listening at %v", configs.User.Host+configs.User.Port)
+	lis, err := net.Listen("tcp", configs.User.Host+configs.User.Port)
 	if err != nil {
 		logger.Fatal(err)
 	}
