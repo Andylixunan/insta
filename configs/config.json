@@ -4,7 +4,7 @@
         "Expire": 15
     },
     "User": {
-        "Host": "localhost",
+        "Host": "10.0.20.3",
         "Port": ":8081",
         "DB":{
             "User": "root",
@@ -15,7 +15,7 @@
         }
     },
     "Auth": {
-        "Host": "localhost",
+        "Host": "10.0.20.3",
         "Port": ":8082"
     },
     "Gateway":{
