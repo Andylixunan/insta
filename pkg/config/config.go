@@ -32,6 +32,7 @@ type Gateway struct {
 type Config struct {
 	JWT     JWT
 	User    User
+	Auth    Auth
 	Gateway Gateway
 }
 
