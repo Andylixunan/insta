@@ -3,10 +3,18 @@ package jwt
 import (
 	"time"
 
+	"github.com/Andylixunan/insta/pkg/config"
 	"github.com/golang-jwt/jwt"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
+
+func NewManager(conf *config.Config) *Manager {
+	return &Manager{
+		secret:  conf.JWT.Secret,
+		expires: conf.JWT.Expire,
+	}
+}
 
 type Manager struct {
 	secret  string
