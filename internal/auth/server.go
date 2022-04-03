@@ -39,6 +39,6 @@ func (s *server) ValidateToken(ctx context.Context, req *pb.ValidateTokenRequest
 		return nil, status.Error(codes.Unauthenticated, "invalid token")
 	}
 	return &pb.ValidateTokenResponse{
-		Valid: true,
+		UserId: claims.ID,
 	}, nil
 }
