@@ -18,6 +18,7 @@ import (
 var (
 	expectedScheme  = "bearer"
 	headerAuthorize = "authorization"
+	ContextKey      = "UserID"
 )
 
 func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
@@ -55,7 +56,7 @@ func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
 				return
 			}
 		}
-		c.Set("UserID", resp.UserId)
+		c.Set(ContextKey, resp.UserId)
 		c.Next()
 	}
 }
