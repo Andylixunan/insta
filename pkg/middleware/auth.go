@@ -28,7 +28,7 @@ func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
 			c.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
-		tokenStr := c.GetString(headerAuthorize)
+		tokenStr := c.Request.Header.Get(headerAuthorize)
 		if len(tokenStr) == 0 {
 			logger.Infof("empty auth token for header: %v", headerAuthorize)
 			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": fmt.Sprintf("empty auth token for header: %v", headerAuthorize)})
@@ -51,7 +51,7 @@ func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
 				c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": fmt.Sprintf("auth token invalid: %v", token)})
 				return
 			} else {
-				c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err})
+				c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": errStatus.Message()})
 				return
 			}
 		}
