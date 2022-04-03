@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -17,8 +16,8 @@ import (
 
 var (
 	expectedScheme  = "bearer"
-	headerAuthorize = "authorization"
-	ContextKey      = "UserID"
+	headerAuthorize = "Authorization"
+	ContextKeyID    = "UserID"
 )
 
 func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
@@ -32,13 +31,13 @@ func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
 		tokenStr := c.GetString(headerAuthorize)
 		if len(tokenStr) == 0 {
 			logger.Infof("empty auth token for header: %v", headerAuthorize)
-			c.AbortWithError(http.StatusForbidden, errors.New(fmt.Sprintf("empty auth token for header: %v", headerAuthorize)))
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": fmt.Sprintf("empty auth token for header: %v", headerAuthorize)})
 			return
 		}
 		splits := strings.SplitN(tokenStr, " ", 2)
 		if len(splits) < 2 || !strings.EqualFold(splits[0], expectedScheme) {
 			logger.Infof("Bad authorization string: %v", tokenStr)
-			c.AbortWithError(http.StatusForbidden, errors.New(fmt.Sprintf("Bad authorization string: %v", tokenStr)))
+			c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": fmt.Sprintf("Bad authorization string: %v", tokenStr)})
 			return
 		}
 		token := splits[1]
@@ -49,14 +48,14 @@ func AuthMiddleware(config *config.Config, logger *log.Logger) gin.HandlerFunc {
 			errStatus, _ := status.FromError(err)
 			if errStatus.Code() == codes.Unauthenticated {
 				logger.Infof("auth token invalid: %v", token)
-				c.AbortWithError(http.StatusForbidden, errors.New(fmt.Sprintf("auth token invalid: %v", token)))
+				c.AbortWithStatusJSON(http.StatusForbidden, gin.H{"error": fmt.Sprintf("auth token invalid: %v", token)})
 				return
 			} else {
-				c.AbortWithError(http.StatusInternalServerError, err)
+				c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": err})
 				return
 			}
 		}
-		c.Set(ContextKey, resp.UserId)
+		c.Set(ContextKeyID, resp.UserId)
 		c.Next()
 	}
 }
