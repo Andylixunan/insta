@@ -14,7 +14,7 @@ import (
 func NewClient(logger *log.Logger, conf *config.Config) (pb.AuthServiceClient, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
-	conn, err := grpc.DialContext(ctx, conf.User.Host+conf.User.Port, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.DialContext(ctx, conf.Auth.Host+conf.Auth.Port, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}
